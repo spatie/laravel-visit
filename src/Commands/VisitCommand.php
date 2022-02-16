@@ -86,7 +86,7 @@ class VisitCommand extends Command
             'url' => $this->argument('url'),
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
-            'bgColor' => $this->getHeaderBackgroundColor($response)
+            'bgColor' => $this->getHeaderBackgroundColor($response),
         ]);
 
         render($view);
