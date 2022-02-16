@@ -5,7 +5,6 @@ namespace Spatie\Visit\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Http\Response;
 use Illuminate\Testing\TestResponse;
 use Spatie\Visit\Client;
 use Spatie\Visit\Colorizers\Colorizer;
@@ -95,7 +94,7 @@ class VisitCommand extends Command
         $colorizer = collect([
             new JsonColorizer(),
             new HtmlColorizer(),
-        ])->first(fn(Colorizer $colorizer) => $colorizer->canColorize($contentType));
+        ])->first(fn (Colorizer $colorizer) => $colorizer->canColorize($contentType));
 
         return $colorizer ?? new DummyColorizer();
     }

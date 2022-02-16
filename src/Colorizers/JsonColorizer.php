@@ -2,7 +2,6 @@
 
 namespace Spatie\Visit\Colorizers;
 
-use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 
 class JsonColorizer extends Colorizer
