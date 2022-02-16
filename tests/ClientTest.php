@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Spatie\Visit\Client;
 
-beforeEach(function() {
-    Route::get('get-route', function() {
+beforeEach(function () {
+    Route::get('get-route', function () {
         return 'get result';
     });
 });

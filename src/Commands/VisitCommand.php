@@ -3,7 +3,6 @@
 namespace Spatie\Visit\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
 use Spatie\Visit\Client;
 
 class VisitCommand extends Command

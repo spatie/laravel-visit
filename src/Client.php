@@ -16,6 +16,5 @@ class Client
 
     public function __construct(protected Application $app)
     {
-
     }
 }
