@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Spatie\Visit\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class VisitCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-visit';
 
     public $description = 'My command';
 
