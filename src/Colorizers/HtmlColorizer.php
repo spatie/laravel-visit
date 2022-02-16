@@ -2,36 +2,25 @@
 
 namespace Spatie\Visit\Colorizers;
 
-use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 
-class HtmlColorizer
+class HtmlColorizer extends Colorizer
 {
-    public function canRun(): bool
+    public function getColorizerToolName(): string
     {
-        return ! empty($this->getBatPath());
+        return 'bat';
     }
 
-    public function colorize(string $html): string
+    public function colorize(string $content): string
     {
         $file = tmpfile();
         $path = stream_get_meta_data($file)['uri'];
-        file_put_contents($path, $html);
+        file_put_contents($path, $content);
 
-        $process = Process::fromShellCommandline("cat {$path} | {$this->getBatPath()} --style=numbers --force-colorization");
+        $process = Process::fromShellCommandline("cat {$path} | {$this->getColorizerToolPath()} --style=changes --force-colorization");
 
         $process->run();
 
-        $process->setTty(true);
-
-        return  $process->getOutput();
-    }
-
-    protected function getBatPath(): string
-    {
-        return (new ExecutableFinder())->find('bat', 'bat', [
-            '/usr/local/bin',
-            '/opt/homebrew/bin',
-        ]);
+        return $process->getOutput();
     }
 }
