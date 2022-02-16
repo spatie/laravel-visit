@@ -1,4 +1,4 @@
-<div class="mt-1">
+<div class="m-1 w-full max-w-80">
     <div class="w-full text-white text-center bg-blue-800"></div>
     <div class="w-full text-white bg-blue-800">
         <span class="px-2 text-left w-1/2">

@@ -5,18 +5,23 @@ namespace Spatie\Visit\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Http\Response;
 use Illuminate\Testing\TestResponse;
 use Spatie\Visit\Client;
 use Spatie\Visit\Colorizers\Colorizer;
 use Spatie\Visit\Colorizers\DummyColorizer;
 use Spatie\Visit\Colorizers\HtmlColorizer;
 use Spatie\Visit\Colorizers\JsonColorizer;
+use Spatie\Visit\Exceptions\InvalidMethod;
 use function Termwind\render;
 
 class VisitCommand extends Command
 {
-    public $signature = 'visit {url} {--method=get} {--user=}';
+    public $signature = '
+        visit {url}
+            {--method=get}
+            {--user=}
+            {--no-color}
+        ';
 
     public $description = 'Visit a route';
 
@@ -54,9 +59,13 @@ class VisitCommand extends Command
 
     protected function getMethod(): string
     {
-        $method = $this->option('method');
+        $method = strtolower($this->option('method'));
 
-        // TODO: validate method
+        $validMethodNames = collect(['get', 'post', 'put', 'patch', 'delete']);
+
+        if (! $validMethodNames->contains($method)) {
+            throw InvalidMethod::make($method, $validMethodNames);
+        }
 
         return $method;
     }
@@ -83,7 +92,13 @@ class VisitCommand extends Command
 
         $colorizer = $this->getColorizer($response);
 
-        echo $colorizer->colorize($response->content());
+        $content = $response->content();
+
+        if (! $this->option('no-color')) {
+            $content = $colorizer->colorize($response->content());
+        }
+
+        echo $content;
 
         return $this;
     }
