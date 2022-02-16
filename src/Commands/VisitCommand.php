@@ -110,7 +110,7 @@ class VisitCommand extends Command
         $colorizer = collect([
             new JsonColorizer(),
             new HtmlColorizer(),
-        ])->first(fn(Colorizer $colorizer) => $colorizer->canColorize($contentType));
+        ])->first(fn (Colorizer $colorizer) => $colorizer->canColorize($contentType));
 
         return $colorizer ?? new DummyColorizer();
     }
