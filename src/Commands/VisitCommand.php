@@ -3,16 +3,18 @@
 namespace Spatie\Visit\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
+use Spatie\Visit\Client;
 
 class VisitCommand extends Command
 {
-    public $signature = 'laravel-visit';
+    public $signature = 'laravel-visit {url}';
 
-    public $description = 'My command';
+    public $description = 'Visit a route';
 
-    public function handle(): int
+    public function handle()
     {
-        $this->comment('All done');
+        Client::make()->get($this->argument('url'))->content();
 
         return self::SUCCESS;
     }
