@@ -24,7 +24,7 @@ class VisitCommand extends Command
         $method = $this->getMethod();
         $url = $this->argument('url');
 
-        /** @var  \Illuminate\Http\Response $response */
+        /** @var \Illuminate\Http\Response $response */
         $response = Client::make()->$method($this->argument('url'));
 
         $view = view('visit::response', [
