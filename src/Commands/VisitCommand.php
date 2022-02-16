@@ -81,11 +81,12 @@ class VisitCommand extends Command
 
     protected function renderResponse(TestResponse $response): self
     {
-        $view = view('visit::response', [
+        $view = view('visit::header', [
             'method' => $this->option('method'),
             'url' => $this->argument('url'),
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
+            'bgColor' => $this->getHeaderBackgroundColor($response)
         ]);
 
         render($view);
@@ -103,9 +104,18 @@ class VisitCommand extends Command
         return $this;
     }
 
+    protected function getHeaderBackgroundColor(TestResponse $response): string
+    {
+        if ($response->isSuccessful() || $response->isRedirect()) {
+            return 'bg-green-800';
+        }
+
+        return 'bg-red-800';
+    }
+
     protected function getColorizer(TestResponse $response): Colorizer
     {
-        $contentType = $response->headers->get('content-type');
+        $contentType = $response->headers->get('content-type', '');
 
         $colorizer = collect([
             new JsonColorizer(),
