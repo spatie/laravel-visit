@@ -2,11 +2,11 @@
 
 namespace Spatie\Visit\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
 use Spatie\Visit\Client;
 use Spatie\Visit\Colorizers\HtmlColorizer;
-use Symfony\Component\Process\Process;
 use function Termwind\render;
 
 class VisitCommand extends Command
@@ -61,7 +61,7 @@ class VisitCommand extends Command
             : User::firstWhere('email', $user);
 
         if (! $user) {
-            throw new \Exception('No user found');
+            throw new Exception('No user found');
         }
 
         auth()->login($user);
