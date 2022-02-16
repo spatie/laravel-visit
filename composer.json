@@ -60,10 +60,7 @@
         "laravel": {
             "providers": [
                 "Spatie\\Visit\\VisitServiceProvider"
-            ],
-            "aliases": {
-                "Visit": "Spatie\\Visit\\Facades\\Visit"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
