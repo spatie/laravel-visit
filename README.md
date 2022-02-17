@@ -1,3 +1,5 @@
+**PACKAGE IN DEVELOPMENT. DO NOT USE (YET)**
+
 # Quickly visit any route of your Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-visit.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-visit)
@@ -5,8 +7,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/spatie/laravel-visit/Check%20&%20fix%20styling?label=code%20style)](https://github.com/spatie/laravel-visit/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-visit.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-visit)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
+This package contains an artisan command `visit` that allows you to visit any route of your Laravel app
 ## Support us
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-visit.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-visit)
@@ -23,37 +24,12 @@ You can install the package via composer:
 composer require spatie/laravel-visit
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-visit-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-visit-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-visit-views"
-```
-
 ## Usage
 
-```php
-$visit = new Spatie\Visit();
-echo $visit->echoPhrase('Hello, Spatie!');
+More detailed instructions coming soon.
+
+```bash
+php artisan visit /your-page
 ```
 
 ## Testing
