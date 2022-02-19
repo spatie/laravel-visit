@@ -19,9 +19,14 @@ class VisitCommand extends Command
     public $signature = '
         visit {url}
             {--method=get}
+            {--show-headers}
+            {--payload=}
             {--user=}
             {--no-color}
         ';
+
+    // raw?
+    // no content?
 
     public $description = 'Visit a route';
 
@@ -70,36 +75,73 @@ class VisitCommand extends Command
         return $method;
     }
 
+    public function getPayload(): array
+    {
+        $payloadString = $this->option('payload');
+
+        if (is_null($payloadString)) {
+            return [];
+        }
+
+        $payload = json_decode($payloadString, true);
+
+        if (is_null($payload)) {
+            throw new Exception("You should pass valid JSON to the `payload option`");
+        }
+
+        return $payload;
+    }
+
     protected function makeRequest(): TestResponse
     {
         $method = $this->getMethod();
 
         $url = $this->argument('url');
 
-        return Client::make()->$method($url);
+        $client =  Client::make();
+
+        return $method === 'get'
+            ? $client->get($url)
+            : $client->$method($url, $this->getPayload());
     }
 
     protected function renderResponse(TestResponse $response): self
     {
-        $view = view('visit::header', [
-            'method' => $this->option('method'),
-            'url' => $this->argument('url'),
-            'statusCode' => $response->getStatusCode(),
-            'content' => $response->content(),
-            'bgColor' => $this->getHeaderBackgroundColor($response)
-        ]);
+        $this->renderContent($response);
 
-        render($view);
+        $this->renderResponseProperties($response);
 
+        return $this;
+    }
+
+    protected function renderContent(TestResponse $response): self
+    {
         $colorizer = $this->getColorizer($response);
 
         $content = $response->content();
 
-        if (! $this->option('no-color')) {
+        if (!$this->option('no-color')) {
             $content = $colorizer->colorize($response->content());
         }
 
         echo $content;
+
+        return $this;
+    }
+
+    protected function renderResponseProperties(TestResponse $response): self
+    {
+        $requestProperties = view('visit::responseProperties', [
+            'method' => $this->option('method'),
+            'url' => $this->argument('url'),
+            'statusCode' => $response->getStatusCode(),
+            'content' => $response->content(),
+            'headers' => $response->headers->all(),
+            'showHeaders' => $this->option('show-headers'),
+            'bgColor' => $this->getHeaderBackgroundColor($response)
+        ]);
+
+        render($requestProperties);
 
         return $this;
     }
