@@ -98,7 +98,7 @@ class VisitCommand extends Command
 
         $url = $this->argument('url');
 
-        $client =  Client::make();
+        $client = Client::make();
 
         return $method === 'get'
             ? $client->get($url)
@@ -120,7 +120,7 @@ class VisitCommand extends Command
 
         $content = $response->content();
 
-        if (!$this->option('no-color')) {
+        if (! $this->option('no-color')) {
             $content = $colorizer->colorize($response->content());
         }
 
@@ -138,7 +138,7 @@ class VisitCommand extends Command
             'content' => $response->content(),
             'headers' => $response->headers->all(),
             'showHeaders' => $this->option('show-headers'),
-            'bgColor' => $this->getHeaderBackgroundColor($response)
+            'bgColor' => $this->getHeaderBackgroundColor($response),
         ]);
 
         render($requestProperties);
