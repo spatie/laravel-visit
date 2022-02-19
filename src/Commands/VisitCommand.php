@@ -17,7 +17,8 @@ use function Termwind\render;
 class VisitCommand extends Command
 {
     public $signature = '
-        visit {url}
+        visit {url?}
+            {--route=}
             {--method=get}
             {--show-headers}
             {--payload=}
@@ -74,7 +75,16 @@ class VisitCommand extends Command
         return $method;
     }
 
-    public function getPayload(): array
+    protected function getUrl(): string
+    {
+        if ($routeName = $this->option('route')) {
+            return route($routeName);
+        }
+
+        return $this->argument('url');
+    }
+
+    protected function getPayload(): array
     {
         $payloadString = $this->option('payload');
 
@@ -95,7 +105,7 @@ class VisitCommand extends Command
     {
         $method = $this->getMethod();
 
-        $url = $this->argument('url');
+        $url = $this->getUrl();
 
         $client = Client::make();
 
