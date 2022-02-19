@@ -28,6 +28,8 @@ class VisitCommand extends Command
             {--hide-response}
         ';
 
+    // add refreshing
+
     public $description = 'Visit a route';
 
     public function handle()
