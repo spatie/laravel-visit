@@ -144,14 +144,14 @@ class VisitCommand extends Command
             $content = $colorizer->colorize($response->content());
         }
 
-        echo $content;
+        $this->output->write($content);
 
         return $this;
     }
 
     protected function renderResponseProperties(TestResponse $response): self
     {
-        $requestProperties = view('visit::responseProperties', [
+        $requestPropertiesView = view('visit::responseProperties', [
             'method' => $this->option('method'),
             'url' => $this->argument('url'),
             'statusCode' => $response->getStatusCode(),
@@ -161,7 +161,7 @@ class VisitCommand extends Command
             'bgColor' => $this->getHeaderBackgroundColor($response),
         ]);
 
-        render($requestProperties);
+        render($requestPropertiesView);
 
         return $this;
     }
