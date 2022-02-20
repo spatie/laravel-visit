@@ -48,7 +48,7 @@ class VisitCommand extends Command
 
     protected function logInUser(): self
     {
-        if (!$user = $this->option('user')) {
+        if (! $user = $this->option('user')) {
             return $this;
         }
 
@@ -56,7 +56,7 @@ class VisitCommand extends Command
             ? User::find($user)
             : User::firstWhere('email', $user);
 
-        if (!$user) {
+        if (! $user) {
             throw new Exception('No user found');
         }
 
@@ -71,7 +71,7 @@ class VisitCommand extends Command
 
         $validMethodNames = collect(['get', 'post', 'put', 'patch', 'delete']);
 
-        if (!$validMethodNames->contains($method)) {
+        if (! $validMethodNames->contains($method)) {
             throw InvalidMethod::make($method, $validMethodNames);
         }
 
@@ -123,11 +123,11 @@ class VisitCommand extends Command
 
     protected function renderResponse(TestResponse $response): self
     {
-        if (!$this->option('hide-response')) {
+        if (! $this->option('hide-response')) {
             $this->renderContent($response);
         }
 
-        if (!$this->option('only-response')) {
+        if (! $this->option('only-response')) {
             $this->renderResponseProperties($response);
         }
 
@@ -140,7 +140,7 @@ class VisitCommand extends Command
 
         $content = $response->content();
 
-        if (!$this->option('no-color')) {
+        if (! $this->option('no-color')) {
             $content = $colorizer->colorize($response->content());
         }
 
@@ -182,7 +182,7 @@ class VisitCommand extends Command
         $colorizer = collect([
             new JsonColorizer(),
             new HtmlColorizer(),
-        ])->first(fn(Colorizer $colorizer) => $colorizer->canColorize($contentType));
+        ])->first(fn (Colorizer $colorizer) => $colorizer->canColorize($contentType));
 
         return $colorizer ?? new DummyColorizer();
     }
