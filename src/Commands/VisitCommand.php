@@ -20,13 +20,13 @@ class VisitCommand extends Command
         visit {url?}
             {--route=}
             {--method=get}
-            {--show-headers}
             {--payload=}
             {--user=}
+            {--handle-exceptions}
+            {--show-headers}
             {--no-color}
             {--only-response}
-            {--hide-response}
-            {--show-exceptions}
+            {--only-response-properties}
         ';
 
     // add refreshing
@@ -112,7 +112,7 @@ class VisitCommand extends Command
 
         $client = Client::make();
 
-        if ($this->option('show-exceptions')) {
+        if (! $this->option('handle-exceptions')) {
             $client->withoutExceptionHandling();
         }
 
@@ -123,7 +123,7 @@ class VisitCommand extends Command
 
     protected function renderResponse(TestResponse $response): self
     {
-        if (! $this->option('hide-response')) {
+        if (! $this->option('only-response-properties')) {
             $this->renderContent($response);
         }
 
