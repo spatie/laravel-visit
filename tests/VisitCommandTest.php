@@ -14,5 +14,4 @@ it('can visit a page', function () {
     expect(true)->toBe(true);
 
     dd(\Illuminate\Support\Facades\Artisan::output());
-
 });

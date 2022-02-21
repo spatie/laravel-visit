@@ -2,9 +2,9 @@
 
 namespace Spatie\Visit\Tests;
 
+use Illuminate\Console\OutputStyle;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Visit\VisitServiceProvider;
-use Illuminate\Console\OutputStyle;
 use Termwind\Termwind;
 
 class TestCase extends Orchestra
