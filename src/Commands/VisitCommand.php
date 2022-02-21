@@ -156,7 +156,7 @@ class VisitCommand extends Command
             'content' => $response->content(),
             'headers' => $response->headers->all(),
             'showHeaders' => $this->option('show-headers'),
-            'bgColor' => $this->getHeaderBackgroundColor($response),
+            'headerStyle' => $this->getHeaderStyle($response),
         ]);
 
         render($requestPropertiesView);
@@ -164,13 +164,13 @@ class VisitCommand extends Command
         return $this;
     }
 
-    protected function getHeaderBackgroundColor(TestResponse $response): string
+    protected function getHeaderStyle(TestResponse $response): string
     {
         if ($response->isSuccessful() || $response->isRedirect()) {
-            return 'bg-green-800';
+            return 'bg-green text-black';
         }
 
-        return 'bg-red-800';
+        return 'bg-red text-white';
     }
 
     protected function getColorizer(TestResponse $response): Colorizer
