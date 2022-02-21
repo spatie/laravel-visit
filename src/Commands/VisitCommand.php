@@ -22,7 +22,7 @@ class VisitCommand extends Command
             {--method=get}
             {--payload=}
             {--user=}
-            {--handle-exceptions}
+            {--show-exceptions}
             {--show-headers}
             {--no-color}
             {--only-response}
@@ -110,7 +110,7 @@ class VisitCommand extends Command
 
         $client = Client::make();
 
-        if (! $this->option('handle-exceptions')) {
+        if ($this->option('show-exceptions')) {
             $client->withoutExceptionHandling();
         }
 
