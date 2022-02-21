@@ -12,4 +12,7 @@ beforeEach(function () {
 it('can visit a page', function () {
     Artisan::call('visit /');
     expect(true)->toBe(true);
+
+    dd(\Illuminate\Support\Facades\Artisan::output());
+
 });
