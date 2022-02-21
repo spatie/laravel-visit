@@ -29,8 +29,6 @@ class VisitCommand extends Command
             {--only-response-properties}
         ';
 
-    // add refreshing
-
     public $description = 'Visit a route';
 
     public function handle()
