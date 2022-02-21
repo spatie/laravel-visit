@@ -35,8 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Visit\\": "src",
-            "Spatie\\Visit\\Database\\Factories\\": "database/factories"
+            "Spatie\\Visit\\": "src"
         }
     },
     "autoload-dev": {
