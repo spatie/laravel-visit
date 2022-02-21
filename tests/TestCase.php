@@ -17,13 +17,4 @@ class TestCase extends Orchestra
             TermwindServiceProvider::class,
         ];
     }
-
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
-
-        $app->resolving(OutputStyle::class, function ($style): void {
-            Termwind::renderUsing($style->getOutput());
-        });
-    }
 }
