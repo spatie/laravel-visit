@@ -46,7 +46,7 @@ it('can handle a missing route', function() {
 it('can handle a route with an exception', function() {
     Artisan::call("visit /exception");
 
-    expectOutputContains('GET /exception', 500, 'Server Error');
+    expectOutputContains('GET /exception', 500);
 });
 
 it('can display the underlying exception', function() {
