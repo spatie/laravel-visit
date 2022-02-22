@@ -8,6 +8,5 @@ function expectOutputContains(string ...$substrings)
 {
     $output = Artisan::output();
 
-    collect($substrings)->each(fn(string $substring) => expect($output)->toContain($substring));
-
+    collect($substrings)->each(fn (string $substring) => expect($output)->toContain($substring));
 }
