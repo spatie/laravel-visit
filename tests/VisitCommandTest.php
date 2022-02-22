@@ -8,11 +8,11 @@ beforeEach(function () {
         return 'result from home route';
     });
 
-    Route::get('exception', function() {
+    Route::get('exception', function () {
         throw new Exception("exception in route");
     });
 
-    Route::get('my-contact-page', function() {
+    Route::get('my-contact-page', function () {
         return 'result from contact route';
     })->name('contact');
 });
@@ -27,7 +27,7 @@ it('by default if will make GET requests', function () {
     );
 });
 
-it('can handle all methods', function(string $method) {
+it('can handle all methods', function (string $method) {
     Artisan::call("visit / --method={$method}");
 
     expectOutputContains(
@@ -37,23 +37,23 @@ it('can handle all methods', function(string $method) {
     );
 })->with(['get', 'post', 'patch', 'put', 'delete']);
 
-it('can handle a missing route', function() {
+it('can handle a missing route', function () {
     Artisan::call("visit /non-existing-route");
 
     expectOutputContains('GET /non-existing-route', 404);
 });
 
-it('can handle a route with an exception', function() {
+it('can handle a route with an exception', function () {
     Artisan::call("visit /exception");
 
     expectOutputContains('GET /exception', 500, 'Server Error');
 });
 
-it('can display the underlying exception', function() {
+it('can display the underlying exception', function () {
     Artisan::call("visit /exception --show-exception");
 })->throws('exception in route');
 
-it('can visit a route using a route name', function() {
+it('can visit a route using a route name', function () {
     Artisan::call("visit --route=contact");
 
     expectOutputContains(
@@ -62,4 +62,3 @@ it('can visit a route using a route name', function() {
         'result from contact route',
     );
 });
-
