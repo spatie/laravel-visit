@@ -1,7 +1,6 @@
 <?php
 
 use Spatie\Visit\Tests\TestCase;
-use \Illuminate\Support\Arr;
 
 uses(TestCase::class)->in(__DIR__);
 

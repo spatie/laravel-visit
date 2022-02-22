@@ -99,10 +99,10 @@ php artisan visit /my-page --show-headers
 
 When your application responds with an exception, the `visit` command will show the html of the error page.
 
-To let the `visit` command display the actual exception, use the `--show-exceptions` option.
+To let the `visit` command display the actual exception, use the `--show-exception` option.
 
 ```bash
-php artisan visit /page-with-exception --show-exceptions
+php artisan visit /page-with-exception --show-exception
 ```
 
 ### Only displaying the response

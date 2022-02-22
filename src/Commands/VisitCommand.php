@@ -22,7 +22,7 @@ class VisitCommand extends Command
             {--method=get}
             {--payload=}
             {--user=}
-            {--show-exceptions}
+            {--show-exception}
             {--show-headers}
             {--no-color}
             {--only-response}
@@ -79,7 +79,7 @@ class VisitCommand extends Command
     protected function getUrl(): string
     {
         if ($routeName = $this->option('route')) {
-            return route($routeName);
+            return route($routeName, absolute: false);
         }
 
         return $this->argument('url');
@@ -110,7 +110,7 @@ class VisitCommand extends Command
 
         $client = Client::make();
 
-        if ($this->option('show-exceptions')) {
+        if ($this->option('show-exception')) {
             $client->withoutExceptionHandling();
         }
 
@@ -151,7 +151,7 @@ class VisitCommand extends Command
     {
         $requestPropertiesView = view('visit::responseProperties', [
             'method' => $this->option('method'),
-            'url' => $this->argument('url'),
+            'url' => $this->getUrl(),
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
             'headers' => $response->headers->all(),
