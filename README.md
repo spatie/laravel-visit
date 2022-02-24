@@ -1,5 +1,3 @@
-**PACKAGE IN DEVELOPMENT. DO NOT USE (YET)**
-
 # Quickly visit any route of your Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-visit.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-visit)
@@ -47,7 +45,7 @@ To visit a certain page, execute `php artisan` followed by a URL.
 php artisan visit /your-page
 ```
 
-![screenshot](/images/html.png)
+![screenshot](https://spatie.github.io/laravel-visit/images/html.png)
 
 Instead of passing an URL, you can pass a route name to the `route` option. Here's an example where we will visit the route named "contact".
 
