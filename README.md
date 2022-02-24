@@ -8,7 +8,7 @@
 This package contains an artisan command `visit` that allows you to visit any route of your Laravel app. 
 
 ```bash
-php artisan /my-page
+php artisan visit /my-page
 ```
 
 The command display the colorized version of the HTML...
