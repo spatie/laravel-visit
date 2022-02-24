@@ -37,6 +37,33 @@ You can install the package via composer:
 composer require spatie/laravel-visit
 ```
 
+Optionally, you can publish the config file.
+
+```bash
+php artisan vendor:publish --tag="visit-config"
+```
+
+This is the content of the published config file:
+
+```php
+return [
+    /*
+     * These classes are responsible for colorizing the output.
+     */
+    'colorizers' => [
+        Spatie\Visit\Colorizers\JsonColorizer::class,
+        Spatie\Visit\Colorizers\HtmlColorizer::class,
+    ],
+
+    /*
+     * These stats will be displayed in the response block.
+     */
+    'stats' => [
+        ...Spatie\Visit\Stats\DefaultStatsClasses::all(),
+    ]
+];
+```
+
 ## Usage
 
 To visit a certain page, execute `php artisan` followed by a URL.
@@ -129,7 +156,21 @@ The `visit` command will automatically colorize any HTML and JSON output. To avo
 php artisan visit / --no-color
 ```
 
+### Displaying the result HTML as text
 
+Usually an HTML response is quite lengthy. This can make it hard to quickly see what text will be displayed in the browser. To convert an HTML to a text variant, you can pass the `--as-text` option.
+
+```bash
+php artisan visit / --as-text
+```
+
+This is how the default Laravel homepage will look like.
+
+![screenshot](TODO: insert screenshot)
+
+### Adding stats
+
+By default, 
 
 ## Testing
 

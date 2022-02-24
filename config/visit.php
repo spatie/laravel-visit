@@ -1,19 +1,18 @@
 <?php
 
-use Spatie\Visit\Colorizers\HtmlColorizer;
-use Spatie\Visit\Colorizers\JsonColorizer;
-use Spatie\Visit\Stats\DefaultStatsClasses;
-
 return [
     /*
      * These classes are responsible for colorizing the output.
      */
     'colorizers' => [
-        JsonColorizer::class,
-        HtmlColorizer::class,
+        Spatie\Visit\Colorizers\JsonColorizer::class,
+        Spatie\Visit\Colorizers\HtmlColorizer::class,
     ],
 
+    /*
+     * These stats will be displayed in the response block.
+     */
     'stats' => [
-        ...DefaultStatsClasses::all(),
+        ...Spatie\Visit\Stats\DefaultStatsClasses::all(),
     ]
 ];
