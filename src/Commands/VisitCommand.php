@@ -12,6 +12,8 @@ use Spatie\Visit\Exceptions\InvalidMethod;
 use Spatie\Visit\Exceptions\InvalidPayload;
 use Spatie\Visit\Exceptions\NoUrlSpecified;
 use Spatie\Visit\Exceptions\NoUserFound;
+use Spatie\Visit\Stats\StatResult;
+use Spatie\Visit\Stats\StatsCollection;
 use function Termwind\render;
 
 class VisitCommand extends Command
@@ -35,9 +37,8 @@ class VisitCommand extends Command
     {
         $this->logInUser();
 
-        $response = $this->makeRequest();
-
-        $this->renderResponse($response);
+        ['response' => $response, 'statResults' => $statResults] = $this->makeRequest();
+        $this->renderResponse($response, $statResults);
 
         return $response->isSuccessful() || $response->isRedirect()
             ? self::SUCCESS
@@ -106,31 +107,50 @@ class VisitCommand extends Command
         return $payload;
     }
 
-    protected function makeRequest(): TestResponse
+    /** @return array{response: TestResponse, statResults:array<int, \Spatie\Visit\Stats\StatResult>} */
+    protected function makeRequest(): array
     {
         $method = $this->getMethod();
 
         $url = $this->getUrl();
 
-        $client = Client::make();
+        $application = app();
+
+        $client = new Client($application);
 
         if ($this->option('show-exception')) {
             $client->withoutExceptionHandling();
         }
 
-        return $method === 'get'
+        $stats = StatsCollection::fromConfig();
+
+        $stats->callBeforeRequest($application);
+
+        $response = $method === 'get'
             ? $client->get($url)
             : $client->$method($url, $this->getPayload());
+
+        $stats->callAfterRequest($application);
+
+        $statResults = $stats->getResults();
+
+        return compact('response', 'statResults');
     }
 
-    protected function renderResponse(TestResponse $response): self
+    /**
+     * @param \Illuminate\Testing\TestResponse $response
+     * @param array<int, StatResult $statResults
+     *
+     * @return $this
+     */
+    protected function renderResponse(TestResponse $response, array $statResults): self
     {
         if (! $this->option('only-response-properties')) {
             $this->renderContent($response);
         }
 
         if (! $this->option('only-response')) {
-            $this->renderResponseProperties($response);
+            $this->renderResponseProperties($response, $statResults);
         }
 
         return $this;
@@ -151,7 +171,14 @@ class VisitCommand extends Command
         return $this;
     }
 
-    protected function renderResponseProperties(TestResponse $response): self
+    /**
+     * @param \Illuminate\Testing\TestResponse $response
+     * @param array<int, StatResult> $statResults
+     *
+     * @return $this
+     * @throws \Spatie\Visit\Exceptions\NoUrlSpecified
+     */
+    protected function renderResponseProperties(TestResponse $response, array $statResults): self
     {
         $requestPropertiesView = view('visit::responseProperties', [
             'method' => $this->option('method'),
@@ -161,6 +188,7 @@ class VisitCommand extends Command
             'headers' => $response->headers->all(),
             'showHeaders' => $this->option('show-headers'),
             'headerStyle' => $this->getHeaderStyle($response),
+            'statResults' => $statResults,
         ]);
 
         render($requestPropertiesView);

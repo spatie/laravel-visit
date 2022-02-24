@@ -2,6 +2,7 @@
 
 use Spatie\Visit\Colorizers\HtmlColorizer;
 use Spatie\Visit\Colorizers\JsonColorizer;
+use Spatie\Visit\Stats\DefaultStatsClasses;
 
 return [
     /*
@@ -11,4 +12,8 @@ return [
         JsonColorizer::class,
         HtmlColorizer::class,
     ],
+
+    'stats' => [
+        ...DefaultStatsClasses::all(),
+    ]
 ];
