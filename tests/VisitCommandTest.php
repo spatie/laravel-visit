@@ -46,7 +46,7 @@ beforeEach(function () {
     ]);
 });
 
-it('by default if will make GET requests', function () {
+it('will make GET requests by default', function () {
     Artisan::call('visit /');
 
     expectOutputContains(
