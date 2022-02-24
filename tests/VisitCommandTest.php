@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Spatie\Visit\Exceptions\InvalidPayload;
 use Spatie\Visit\Exceptions\NoUserFound;
-use Illuminate\Http\Request;
 
 beforeEach(function () {
     Route::any('/', function () {
@@ -20,7 +20,7 @@ beforeEach(function () {
         return 'result from contact route';
     })->name('contact');
 
-    Route::get('logged-in-user', function() {
+    Route::get('logged-in-user', function () {
         $userEmail = auth()->user()?->email;
 
         if (! $userEmail) {
@@ -30,7 +30,7 @@ beforeEach(function () {
         return "{$userEmail} is logged in";
     });
 
-    Route::post('payload', function(Request $request) {
+    Route::post('payload', function (Request $request) {
         return $request->input('testKey');
     });
 
@@ -87,33 +87,33 @@ it('can visit a route using a route name', function () {
     );
 });
 
-it('will not log in a user by default', function() {
+it('will not log in a user by default', function () {
     Artisan::call("visit /logged-in-user");
 
     expectOutputContains('GET /logged-in-user', 'nobody is logged in');
 });
 
-it('can log in user by id', function() {
+it('can log in user by id', function () {
     Artisan::call("visit /logged-in-user --user=1");
 
     expectOutputContains('GET /logged-in-user', 'john@example.com is logged in');
 });
 
-it('will not log in a non-existing user by id', function() {
+it('will not log in a non-existing user by id', function () {
     Artisan::call("visit /logged-in-user --user=2");
 })->throws(NoUserFound::class);
 
-it('can log in user by email', function() {
+it('can log in user by email', function () {
     Artisan::call("visit /logged-in-user --user=john@example.com");
 
     expectOutputContains('GET /logged-in-user', 'john@example.com is logged in');
 });
 
-it('will not log in a non-existing user by email', function() {
+it('will not log in a non-existing user by email', function () {
     Artisan::call("visit /logged-in-user --user=non-existing@example.com");
 })->throws(NoUserFound::class);
 
-it('will accept json as payload', function() {
+it('will accept json as payload', function () {
     $jsonPayload = json_encode(['testKey' => 'testValue']);
 
     $jsonPayload = escapeshellarg($jsonPayload);
@@ -123,6 +123,6 @@ it('will accept json as payload', function() {
     expectOutputContains('POST /payload', 'testValue');
 });
 
-it('will not accept invalid json as payload', function() {
+it('will not accept invalid json as payload', function () {
     Artisan::call("visit /payload --method=post --payload=blabla");
 })->throws(InvalidPayload::class);

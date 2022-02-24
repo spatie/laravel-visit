@@ -2,7 +2,6 @@
 
 namespace Spatie\Visit\Commands;
 
-use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Testing\TestResponse;
