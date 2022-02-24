@@ -14,17 +14,17 @@ class RuntimeStat extends Stat
 
     public function __construct()
     {
-        $this->stopWatch = new Stopwatch(true);
+        $this->stopwatch = new Stopwatch(true);
     }
 
     public function beforeRequest(Application $app)
     {
-        $this->stopWatch->start('default');
+        $this->stopwatch->start('default');
     }
 
     public function afterRequest(Application $app)
     {
-        $this->stopwatchEvent = $this->stopWatch->stop('default');
+        $this->stopwatchEvent = $this->stopwatch->stop('default');
     }
 
     public function getStatResult(): StatResult

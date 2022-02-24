@@ -170,7 +170,85 @@ This is how the default Laravel homepage will look like.
 
 ### Adding stats
 
-By default, 
+In the results block underneath the response, you'll see a few interesting stats by default, such as the response time and queries executed.
+
+You can add more stats there by creating your own `Stat` class. A valid `Stat` is any class that extends `Spatie\Visit\Stats\Stat`. 
+
+Here's how that base class looks like:
+
+```php
+namespace Spatie\Visit\Stats;
+
+use Illuminate\Contracts\Foundation\Application;
+
+abstract class Stat
+{
+    public function beforeRequest(Application $app)
+    {
+    }
+
+    public function afterRequest(Application $app)
+    {
+    }
+
+    abstract public function getStatResult(): StatResult;
+}
+```
+
+As an example implentation, take a look at the `RunTimeStat` that ships with the package.
+
+```php
+namespace Spatie\Visit\Stats;
+
+use Illuminate\Contracts\Foundation\Application;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Stopwatch\StopwatchEvent;
+
+class RuntimeStat extends Stat
+{
+    protected Stopwatch $stopwatch;
+
+    protected ?StopwatchEvent $stopwatchEvent = null;
+
+    public function __construct()
+    {
+        $this->stopwatch = new Stopwatch(true);
+    }
+
+    public function beforeRequest(Application $app)
+    {
+        $this->stopwatch->start('default');
+    }
+
+    public function afterRequest(Application $app)
+    {
+        $this->stopwatchEvent = $this->stopwatch->stop('default');
+    }
+
+    public function getStatResult(): StatResult
+    {
+        $duration = $this->stopwatchEvent->getDuration();
+
+        return StatResult::make('Duration')
+            ->value($duration . 'ms');
+    }
+}
+```
+
+To activate a `Stat`, you should add its class name to the `stats` key of the `visit` config file.
+
+```php
+// in config/stats.php
+
+return [
+    // ...
+    
+    'stats' => [
+        App\Support\YourCustomStat::class,
+        ...Spatie\Visit\Stats\DefaultStatsClasses::all(),
+    ]
+]
+```
 
 ## Testing
 
