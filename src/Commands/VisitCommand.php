@@ -146,7 +146,7 @@ class VisitCommand extends Command
             $content = $colorizer->colorize($response->content());
         }
 
-        $this->output->write($content);
+        $this->output->writeln($content);
 
         return $this;
     }
