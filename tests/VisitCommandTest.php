@@ -130,7 +130,7 @@ it('will accept json as payload', function () {
     Artisan::call("visit /payload --method=post --payload={$jsonPayload}");
 
     expectOutputContains('POST /payload', 'testValue');
-});
+})->skip(runningOnWindows(), 'This feature is not supported on Windows');
 
 it('will not accept invalid json as payload', function () {
     Artisan::call("visit /payload --method=post --payload=blabla");

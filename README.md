@@ -63,6 +63,8 @@ php artisan visit /users/1 --method=delete
 
 ### Passing a payload
 
+**This feature does not work reliable on Windows**
+
 You can pass a payload to non-GET request by using the payload. The payload should be formatted as JSON.
 
 ```bash

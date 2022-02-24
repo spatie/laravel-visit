@@ -10,3 +10,8 @@ function expectOutputContains(string ...$substrings)
 
     collect($substrings)->each(fn (string $substring) => expect($output)->toContain($substring));
 }
+
+function runningOnWindows()
+{
+    return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+}
