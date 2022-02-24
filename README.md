@@ -15,11 +15,11 @@ php artisan /my-page
 
 The command display the colorized version of the HTML...
 
-![screenshot](TODO: add screenshot)
+![screenshot](/images/html.png)
 
 ... followed by a results block.
 
-![screenshot](TODO: add screenshot)
+![screenshot](/images/results.png)
 
 The command can also colorize JSON output. It also has support for some Laravel niceties such as logging in users before making a request, using a route name instead of and URL, and much more.
 
@@ -47,7 +47,7 @@ To visit a certain page, execute `php artisan` followed by a URL.
 php artisan visit /your-page
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](/images/html.png)
 
 Instead of passing an URL, you can pass a route name to the `route` option. Here's an example where we will visit the route named "contact".
 
