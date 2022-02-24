@@ -15,7 +15,7 @@ class Client
 
     public static function make(): self
     {
-        return new static(app());
+        return new self(app());
     }
 
     public function __construct(protected Application $app)

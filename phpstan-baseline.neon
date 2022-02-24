@@ -1,0 +1,12 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Property 'email' does not exist in Illuminate\\\\Foundation\\\\Auth\\\\User model\\.$#"
+			count: 1
+			path: src/Commands/VisitCommand.php
+
+		-
+			message: "#^Variable \\$colorizer on left side of \\?\\? always exists and is always null\\.$#"
+			count: 1
+			path: src/Commands/VisitCommand.php
+
