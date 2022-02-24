@@ -3,7 +3,9 @@
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Spatie\Visit\Exceptions\InvalidPayload;
 use Spatie\Visit\Exceptions\NoUserFound;
+use Illuminate\Http\Request;
 
 beforeEach(function () {
     Route::any('/', function () {
@@ -26,6 +28,10 @@ beforeEach(function () {
         }
 
         return "{$userEmail} is logged in";
+    });
+
+    Route::post('payload', function(Request $request) {
+        return $request->input('testKey');
     });
 
     User::create([
@@ -106,3 +112,17 @@ it('can log in user by email', function() {
 it('will not log in a non-existing user by email', function() {
     Artisan::call("visit /logged-in-user --user=non-existing@example.com");
 })->throws(NoUserFound::class);
+
+it('will accept json as payload', function() {
+    $jsonPayload = json_encode(['testKey' => 'testValue']);
+
+    $jsonPayload = escapeshellarg($jsonPayload);
+
+    Artisan::call("visit /payload --method=post --payload={$jsonPayload}");
+
+    expectOutputContains('POST /payload', 'testValue');
+});
+
+it('will not accept invalid json as payload', function() {
+    Artisan::call("visit /payload --method=post --payload=blabla");
+})->throws(InvalidPayload::class);

@@ -68,7 +68,7 @@ php artisan visit /users/1 --method=delete
 You can pass a payload to non-GET request by using the payload. The payload should be formatted as JSON.
 
 ```bash
-php artisan visit /users --method=post --payload="{name: 'John Doe'}" 
+php artisan visit /users --method=post --payload='{"testKey":"testValue"}'
 ```
 
 ### Logging in a user
