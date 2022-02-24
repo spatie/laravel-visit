@@ -7,7 +7,6 @@ use Spatie\Visit\Stats\StatResult;
 
 class TestStat extends Stat
 {
-
     public function getStatResult(): StatResult
     {
         return StatResult::make('test stat name')->value('test stat value');

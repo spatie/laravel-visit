@@ -154,7 +154,7 @@ it('can output html as text', function () {
     expectOutputContains('GET /html', '[Homepage](https://spatie.be)');
 });
 
-it('can display custom stats', function() {
+it('can display custom stats', function () {
     config()->set('visit.stats', [TestStat::class]);
 
     Artisan::call("visit /");
