@@ -13,6 +13,7 @@ class VisitServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-visit')
             ->hasViews()
+            ->hasConfigFile()
             ->hasCommand(VisitCommand::class);
     }
 }

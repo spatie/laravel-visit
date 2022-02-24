@@ -183,10 +183,9 @@ class VisitCommand extends Command
     {
         $contentType = $response->headers->get('content-type', '');
 
-        $colorizer = collect([
-            new JsonColorizer(),
-            new HtmlColorizer(),
-        ])->first(fn (Colorizer $colorizer) => $colorizer->canColorize($contentType));
+        $colorizer = collect(config('visit.colorizers'))
+            ->map(fn (string $colorizerClassName) => app($colorizerClassName))
+            ->first(fn (Colorizer $colorizer) => $colorizer->canColorize($contentType));
 
         return $colorizer ?? new DummyColorizer();
     }
