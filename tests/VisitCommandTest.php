@@ -88,7 +88,7 @@ it('can visit a route using a route name', function () {
     );
 });
 
-it('will throw a dedicated exception when not specifying a url or route', function() {
+it('will throw a dedicated exception when not specifying a url or route', function () {
     Artisan::call("visit");
 })->throws(NoUrlSpecified::class);
 
