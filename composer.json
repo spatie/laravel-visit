@@ -19,6 +19,7 @@
         "php": "^8.0",
         "illuminate/contracts": "^9.0",
         "nunomaduro/termwind": "^1.5",
+        "soundasleep/html2text": "^2.0",
         "spatie/laravel-package-tools": "^1.11.1",
         "symfony/stopwatch": "^6.0"
     },

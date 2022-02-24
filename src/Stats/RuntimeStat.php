@@ -6,7 +6,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
-class Runtime extends Stat
+class RuntimeStat extends Stat
 {
     protected Stopwatch $stopwatch;
 

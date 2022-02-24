@@ -5,6 +5,7 @@ namespace Spatie\Visit\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Testing\TestResponse;
+use Soundasleep\Html2Text;
 use Spatie\Visit\Client;
 use Spatie\Visit\Colorizers\Colorizer;
 use Spatie\Visit\Colorizers\DummyColorizer;
@@ -27,6 +28,7 @@ class VisitCommand extends Command
             {--show-exception}
             {--show-headers}
             {--no-color}
+            {--as-text}
             {--only-response}
             {--only-response-properties}
         ';
@@ -161,6 +163,14 @@ class VisitCommand extends Command
         $colorizer = $this->getColorizer($response);
 
         $content = $response->content();
+
+        if ($this->option('as-text')) {
+            $content = Html2Text::convert($content,  ['ignore_errors' => true]);
+
+            $this->output->writeln($content);
+
+            return $this;
+        }
 
         if (! $this->option('no-color')) {
             $content = $colorizer->colorize($response->content());

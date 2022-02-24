@@ -7,7 +7,8 @@ class DefaultStatsClasses
     public static function all(): array
     {
         return [
-            Runtime::class,
+            RuntimeStat::class,
+            QueryCountStat::class,
         ];
     }
 }
