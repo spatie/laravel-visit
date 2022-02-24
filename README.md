@@ -15,11 +15,11 @@ php artisan /my-page
 
 The command display the colorized version of the HTML...
 
-![screenshot](/images/html.png)
+![screenshot](https://spatie.github.io/laravel-visit/images/html.png)
 
 ... followed by a results block.
 
-![screenshot](/images/results.png)
+![screenshot](https://spatie.github.io/laravel-visit/images/results.png)
 
 The command can also colorize JSON output. It also has support for some Laravel niceties such as logging in users before making a request, using a route name instead of and URL, and much more.
 
