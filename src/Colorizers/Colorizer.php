@@ -3,16 +3,25 @@
 namespace Spatie\Visit\Colorizers;
 
 use Symfony\Component\Process\ExecutableFinder;
+use Symfony\Component\Process\Process;
 
 abstract class Colorizer
 {
     public function canColorize(string $contentType): bool
     {
         if ($this->getColorizerToolName() === '') {
-            return true;
+            return false;
         }
 
-        return ! empty($this->getColorizerToolPath());
+        if (empty($this->getColorizerToolPath())) {
+            return false;
+        }
+
+        if (! $this->colorizerCanExecute()) {
+            return false;
+        }
+
+        return true;
     }
 
     abstract public function colorize(string $content): string;
@@ -34,5 +43,14 @@ abstract class Colorizer
             '/usr/local/bin',
             '/opt/homebrew/bin',
         ]);
+    }
+
+    protected function colorizerCanExecute(): bool
+    {
+        $process = Process::fromShellCommandline($this->getColorizerToolPath());
+
+        $process->run();
+
+        return $process->isSuccessful();
     }
 }
