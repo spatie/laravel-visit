@@ -35,6 +35,10 @@ beforeEach(function () {
         return $request->input('testKey');
     });
 
+    Route::get('json', function() {
+       return response()->json(['jsonKey' => 1]);
+    });
+
     User::create([
         'name' => 'John Doe',
         'email' => 'john@example.com',
@@ -131,3 +135,10 @@ it('will accept json as payload', function () {
 it('will not accept invalid json as payload', function () {
     Artisan::call("visit /payload --method=post --payload=blabla");
 })->throws(InvalidPayload::class);
+
+
+it('can output json', function() {
+    Artisan::call("visit /json");
+
+    expectOutputContains('GET /json', 'jsonKey');
+});
