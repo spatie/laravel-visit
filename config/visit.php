@@ -8,7 +8,7 @@ return [
      * These classes are responsible for colorizing the output.
      */
     'colorizers' => [
-        JsonColorizer::class,
-        HtmlColorizer::class,
+        //JsonColorizer::class,
+        //HtmlColorizer::class,
     ],
 ];
