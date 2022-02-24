@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Visit\Exceptions\InvalidPayload;
 use Spatie\Visit\Exceptions\NoUrlSpecified;
 use Spatie\Visit\Exceptions\NoUserFound;
+use Spatie\Visit\Tests\TestClasses\TestStat;
 
 beforeEach(function () {
     Route::any('/', function () {
@@ -151,4 +152,12 @@ it('can output html as text', function() {
     Artisan::call("visit /html --as-text");
 
     expectOutputContains('GET /html', '[Homepage](https://spatie.be)');
+});
+
+it('can display custom stats', function() {
+    config()->set('visit.stats', [TestStat::class]);
+
+    Artisan::call("visit /");
+
+    expectOutputContains('GET /', 'Test Stat Name', 'test stat value');
 });
