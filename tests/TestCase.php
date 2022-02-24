@@ -11,6 +11,13 @@ use Termwind\Laravel\TermwindServiceProvider;
 
 class TestCase extends Orchestra
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->disableColorizers();
+    }
+
     protected function getPackageProviders($app)
     {
         return [
@@ -32,5 +39,10 @@ class TestCase extends Orchestra
         });
 
         Model::unguard();
+    }
+
+    protected function disableColorizers()
+    {
+        config()->set('visit.colorizers', []);
     }
 }
