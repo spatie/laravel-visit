@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Spatie\Visit\Exceptions\InvalidPayload;
+use Spatie\Visit\Exceptions\NoUrlSpecified;
 use Spatie\Visit\Exceptions\NoUserFound;
 
 beforeEach(function () {
@@ -86,6 +87,10 @@ it('can visit a route using a route name', function () {
         'result from contact route',
     );
 });
+
+it('will throw a dedicated exception when not specifying a url or route', function() {
+    Artisan::call("visit");
+})->throws(NoUrlSpecified::class);
 
 it('will not log in a user by default', function () {
     Artisan::call("visit /logged-in-user");

@@ -91,7 +91,7 @@ By default, the `visit` command will not show any headers. To display them, add 
 php artisan visit /my-page --show-headers
 ```
 
-![screenshot](TODO: add screenshot)
+![screenshot](https://spatie.github.io/laravel-visit/images/headers.png)
 
 ### Showing exception pages
 

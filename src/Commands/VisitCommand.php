@@ -12,6 +12,7 @@ use Spatie\Visit\Colorizers\HtmlColorizer;
 use Spatie\Visit\Colorizers\JsonColorizer;
 use Spatie\Visit\Exceptions\InvalidMethod;
 use Spatie\Visit\Exceptions\InvalidPayload;
+use Spatie\Visit\Exceptions\NoUrlSpecified;
 use Spatie\Visit\Exceptions\NoUserFound;
 use function Termwind\render;
 
@@ -83,7 +84,11 @@ class VisitCommand extends Command
             return route($routeName, absolute: false);
         }
 
-        return $this->argument('url');
+        if ($url = $this->argument('url')) {
+            return $url;
+        }
+
+        throw NoUrlSpecified::make();
     }
 
     protected function getPayload(): array
