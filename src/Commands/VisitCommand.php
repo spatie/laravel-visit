@@ -8,8 +8,6 @@ use Illuminate\Testing\TestResponse;
 use Spatie\Visit\Client;
 use Spatie\Visit\Colorizers\Colorizer;
 use Spatie\Visit\Colorizers\DummyColorizer;
-use Spatie\Visit\Colorizers\HtmlColorizer;
-use Spatie\Visit\Colorizers\JsonColorizer;
 use Spatie\Visit\Exceptions\InvalidMethod;
 use Spatie\Visit\Exceptions\InvalidPayload;
 use Spatie\Visit\Exceptions\NoUrlSpecified;
