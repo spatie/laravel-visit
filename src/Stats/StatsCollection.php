@@ -3,16 +3,13 @@
 namespace Spatie\Visit\Stats;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Collection;
-use \Spatie\Visit\Stats\Stat;
-use \Spatie\Visit\Stats\StatResult;
 
 class StatsCollection
 {
     public static function fromConfig(): self
     {
         $items = collect(config('visit.stats'))
-            ->map(fn(string $statsClassName) => app($statsClassName))
+            ->map(fn (string $statsClassName) => app($statsClassName))
             ->toArray();
 
         return new self($items);
@@ -23,23 +20,19 @@ class StatsCollection
      */
     protected function __construct(
         protected array $stats,
-    )
-    {
-
+    ) {
     }
 
     public function callBeforeRequest(Application $app)
     {
-        foreach($this->stats as $stat)
-        {
+        foreach ($this->stats as $stat) {
             $stat->beforeRequest($app);
         }
     }
 
     public function callAfterRequest(Application $app)
     {
-        foreach($this->stats as $stat)
-        {
+        foreach ($this->stats as $stat) {
             $stat->afterRequest($app);
         }
     }
@@ -50,7 +43,7 @@ class StatsCollection
     public function getResults(): array
     {
         return collect($this->stats)
-            ->map(fn(Stat $stat) => $stat->getStatResult())
+            ->map(fn (Stat $stat) => $stat->getStatResult())
             ->toArray();
     }
 }
