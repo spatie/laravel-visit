@@ -144,10 +144,10 @@ it('can output json', function () {
     expectOutputContains('GET /json', 'jsonKey');
 });
 
-it('can output html as text', function() {
-   Route::get('html', function() {
+it('can output html as text', function () {
+    Route::get('html', function () {
         return '<html><a href="https://spatie.be">Homepage</a></html>';
-   });
+    });
 
     Artisan::call("visit /html --as-text");
 
