@@ -21,14 +21,14 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        Schema::create('users', function(Blueprint $table) {
-                $table->id();
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
 
-                $table->string('name');
-                $table->string('email');
-                $table->string('password');
+            $table->string('name');
+            $table->string('email');
+            $table->string('password');
 
-                $table->timestamps();
+            $table->timestamps();
         });
 
         Model::unguard();
