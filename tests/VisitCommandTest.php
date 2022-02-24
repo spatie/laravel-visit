@@ -35,8 +35,8 @@ beforeEach(function () {
         return $request->input('testKey');
     });
 
-    Route::get('json', function() {
-       return response()->json(['jsonKey' => 1]);
+    Route::get('json', function () {
+        return response()->json(['jsonKey' => 1]);
     });
 
     User::create([
@@ -137,7 +137,7 @@ it('will not accept invalid json as payload', function () {
 })->throws(InvalidPayload::class);
 
 
-it('can output json', function() {
+it('can output json', function () {
     Artisan::call("visit /json");
 
     expectOutputContains('GET /json', 'jsonKey');
