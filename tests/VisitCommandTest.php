@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Spatie\Visit\Exceptions\NoUserFound;
 
 beforeEach(function () {
     Route::any('/', function () {
@@ -15,6 +17,22 @@ beforeEach(function () {
     Route::get('my-contact-page', function () {
         return 'result from contact route';
     })->name('contact');
+
+    Route::get('logged-in-user', function() {
+        $userEmail = auth()->user()?->email;
+
+        if (! $userEmail) {
+            $userEmail = 'nobody';
+        }
+
+        return "{$userEmail} is logged in";
+    });
+
+    User::create([
+        'name' => 'John Doe',
+        'email' => 'john@example.com',
+        'password' => 'password',
+    ]);
 });
 
 it('by default if will make GET requests', function () {
@@ -62,3 +80,29 @@ it('can visit a route using a route name', function () {
         'result from contact route',
     );
 });
+
+it('will not log in a user by default', function() {
+    Artisan::call("visit /logged-in-user");
+
+    expectOutputContains('GET /logged-in-user', 'nobody is logged in');
+});
+
+it('can log in user by id', function() {
+    Artisan::call("visit /logged-in-user --user=1");
+
+    expectOutputContains('GET /logged-in-user', 'john@example.com is logged in');
+});
+
+it('will not log in a non-existing user by id', function() {
+    Artisan::call("visit /logged-in-user --user=2");
+})->throws(NoUserFound::class);
+
+it('can log in user by email', function() {
+    Artisan::call("visit /logged-in-user --user=john@example.com");
+
+    expectOutputContains('GET /logged-in-user', 'john@example.com is logged in');
+});
+
+it('will not log in a non-existing user by email', function() {
+    Artisan::call("visit /logged-in-user --user=non-existing@example.com");
+})->throws(NoUserFound::class);

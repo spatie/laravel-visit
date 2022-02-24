@@ -13,6 +13,6 @@ class InvalidMethod extends Exception
             ->map(fn (string $method) => "`{$method}`")
             ->join(', ', ' and ');
 
-        return new static("`{$invalidMethodName}` is not a valid name. Valid method names are {$validMethodNames}.");
+        return new self("`{$invalidMethodName}` is not a valid name. Valid method names are {$validMethodNames}.");
     }
 }

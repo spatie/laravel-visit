@@ -12,6 +12,8 @@ use Spatie\Visit\Colorizers\DummyColorizer;
 use Spatie\Visit\Colorizers\HtmlColorizer;
 use Spatie\Visit\Colorizers\JsonColorizer;
 use Spatie\Visit\Exceptions\InvalidMethod;
+use Spatie\Visit\Exceptions\InvalidPayload;
+use Spatie\Visit\Exceptions\NoUserFound;
 use function Termwind\render;
 
 class VisitCommand extends Command
@@ -55,7 +57,7 @@ class VisitCommand extends Command
             : User::firstWhere('email', $user);
 
         if (! $user) {
-            throw new Exception('No user found');
+            throw NoUserFound::make();
         }
 
         auth()->login($user);
@@ -96,7 +98,7 @@ class VisitCommand extends Command
         $payload = json_decode($payloadString, true);
 
         if (is_null($payload)) {
-            throw new Exception("You should pass valid JSON to the `payload option`");
+            throw InvalidPayload::make();
         }
 
         return $payload;
