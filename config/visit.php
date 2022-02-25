@@ -14,5 +14,5 @@ return [
      */
     'stats' => [
         ...Spatie\Visit\Stats\DefaultStatsClasses::all(),
-    ]
+    ],
 ];

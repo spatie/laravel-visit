@@ -33,6 +33,11 @@ class VisitCommand extends Command
             {--only-response-properties}
         ';
 
+    // filter: json, xpath
+    // only-stats overwegen
+    // payload as file
+    // display request as curl
+
     public $description = 'Visit a route';
 
     public function handle()
