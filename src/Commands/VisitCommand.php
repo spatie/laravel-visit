@@ -30,11 +30,10 @@ class VisitCommand extends Command
             {--no-color}
             {--as-text}
             {--only-response}
-            {--only-response-properties}
+            {--only-stats}
         ';
 
     // filter: json, xpath
-    // only-stats overwegen
     // payload as file
     // display request as curl
 
@@ -157,7 +156,7 @@ class VisitCommand extends Command
         }
 
         if (! $this->option('only-response')) {
-            $this->renderResponseProperties($response, $statResults);
+            $this->renderStats($response, $statResults);
         }
 
         return $this;
@@ -193,9 +192,9 @@ class VisitCommand extends Command
      * @return $this
      * @throws \Spatie\Visit\Exceptions\NoUrlSpecified
      */
-    protected function renderResponseProperties(TestResponse $response, array $statResults): self
+    protected function renderStats(TestResponse $response, array $statResults): self
     {
-        $requestPropertiesView = view('visit::responseProperties', [
+        $requestPropertiesView = view('visit::stats', [
             'method' => $this->option('method'),
             'url' => $this->getUrl(),
             'statusCode' => $response->getStatusCode(),

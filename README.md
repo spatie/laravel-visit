@@ -142,10 +142,10 @@ php artisan visit / --only-response
 
 ### Only displaying the response properties block
 
-To avoid displaying the response, and only display the response result block, use the `--only-response-properties` option
+To avoid displaying the response, and only display the response result block, use the `--only-stats` option
 
 ```bash
-php artisan visit / --only-response-properties
+php artisan visit / --only-stats
 ```
 
 ### Avoid colorizing the response
