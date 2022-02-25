@@ -9,6 +9,7 @@ class DefaultStatsClasses
         return [
             RuntimeStat::class,
             QueryCountStat::class,
+            ModelsRetrievedStat::class,
         ];
     }
 }
