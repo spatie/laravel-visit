@@ -162,10 +162,8 @@ it('can display custom stats', function () {
     expectOutputContains('GET /', 'Test Stat Name', 'test stat value');
 });
 
-it('can filter json content', function() {
-
+it('can filter json content', function () {
 });
 
-it('can filter html content', function() {
-
+it('can filter html content', function () {
 });

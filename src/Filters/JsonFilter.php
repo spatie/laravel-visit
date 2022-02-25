@@ -7,7 +7,6 @@ use Illuminate\Testing\TestResponse;
 
 class JsonFilter extends Filter
 {
-
     public function canFilter(TestResponse $response, string $content): bool
     {
         $contentType = $response->headers->get('content-type', '');
