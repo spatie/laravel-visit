@@ -57,7 +57,7 @@ class VisitCommand extends Command
 
     protected function logInUser(): self
     {
-        if (!$user = $this->option('user')) {
+        if (! $user = $this->option('user')) {
             return $this;
         }
 
@@ -65,7 +65,7 @@ class VisitCommand extends Command
             ? User::find($user)
             : User::firstWhere('email', $user);
 
-        if (!$user) {
+        if (! $user) {
             throw NoUserFound::make();
         }
 
@@ -80,7 +80,7 @@ class VisitCommand extends Command
 
         $validMethodNames = collect(['get', 'post', 'put', 'patch', 'delete']);
 
-        if (!$validMethodNames->contains($method)) {
+        if (! $validMethodNames->contains($method)) {
             throw InvalidMethod::make($method, $validMethodNames);
         }
 
@@ -155,11 +155,11 @@ class VisitCommand extends Command
      */
     protected function renderResponse(TestResponse $response, array $statResults): self
     {
-        if (!$this->option('only-stats')) {
+        if (! $this->option('only-stats')) {
             $this->renderContent($response);
         }
 
-        if (!$this->option('only-response')) {
+        if (! $this->option('only-response')) {
             $this->renderStats($response, $statResults);
         }
 
@@ -184,7 +184,7 @@ class VisitCommand extends Command
             return $this;
         }
 
-        if (!$this->option('no-color')) {
+        if (! $this->option('no-color')) {
             $colorizer = $this->getColorizer($response);
 
             $content = $colorizer->colorize($content);
@@ -234,8 +234,8 @@ class VisitCommand extends Command
         $contentType = $response->headers->get('content-type', '');
 
         $colorizer = collect(config('visit.colorizers'))
-            ->map(fn(string $colorizerClassName) => app($colorizerClassName))
-            ->first(fn(Colorizer $colorizer) => $colorizer->canColorize($contentType));
+            ->map(fn (string $colorizerClassName) => app($colorizerClassName))
+            ->first(fn (Colorizer $colorizer) => $colorizer->canColorize($contentType));
 
         return $colorizer ?? new DummyColorizer();
     }
@@ -243,8 +243,8 @@ class VisitCommand extends Command
     protected function getFilter(TestResponse $response, string $content): Filter
     {
         $filter = collect(config('visit.filters'))
-            ->map(fn(string $filterClassName) => app($filterClassName))
-            ->first(fn(Filter $filter) => $filter->canFilter($response, $content));
+            ->map(fn (string $filterClassName) => app($filterClassName))
+            ->first(fn (Filter $filter) => $filter->canFilter($response, $content));
 
         return $filter ?? new DummyFilter();
     }
