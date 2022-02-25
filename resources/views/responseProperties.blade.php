@@ -1,24 +1,22 @@
 <div class="ml-2 my-1">
-    <div class="w-full {{ $headerStyle }} pt-1 px-2 max-w-100">
-        <div>
-            <span class="text-left w-1/2">
-                <span class="uppercase font-bold mr-1">{{ $method }}</span>
-                <span>{{ $url }}</span>
-            </span>
-            <span class="text-right w-1/2">
-                {{ $statusCode }}
-            </span>
-        </div>
+    <div class="w-full {{ $headerStyle }} max-w-100"></div>
+    <div class="w-full {{ $headerStyle }} px-2 max-w-100">
+        <span class="text-left w-1/2">
+            <span class="uppercase font-bold mr-1">{{ $method }}</span>
+            <span>{{ $url }}</span>
+        </span>
+        <span class="text-right w-1/2">
+            {{ $statusCode }}
+        </span>
     </div>
-    <div class="w-full {{ $headerStyle }} pb-1 px-2 max-w-100">
-        @if (count($statResults))
+    @if (count($statResults))
+        <div class="w-full {{ $headerStyle }} px-2 max-w-100">
             @foreach ($statResults as $statResult)
-                <div>
-                    <span class="font-bold text-gray capitalize">{{ $statResult->name }}:</span> {{ $statResult->value }}
-                </div>
+                <span class="font-bold text-gray capitalize">{{ $statResult->name }}:</span> {{ $statResult->value }}
             @endforeach
-        @endif
-    </div>
+        </div>
+    @endif
+    <div class="w-full {{ $headerStyle }} max-w-100"></div>
 
     @if($showHeaders)
         <div class="underline mt-1">Headers:</div>
