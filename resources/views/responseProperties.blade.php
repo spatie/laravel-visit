@@ -1,5 +1,5 @@
 <div class="ml-2 my-1">
-    <div class="w-full {{ $headerStyle }} py-1 px-2 max-w-100">
+    <div class="w-full {{ $headerStyle }} pt-1 px-2 max-w-100">
         <div>
             <span class="text-left w-1/2">
                 <span class="uppercase font-bold mr-1">{{ $method }}</span>
@@ -9,16 +9,14 @@
                 {{ $statusCode }}
             </span>
         </div>
-
-        @if(count($statResults))
-            <div class="mt-1">
-                @foreach ($statResults as $statResult)
-                    <div>
-                    <span
-                        class="font-bold text-gray capitalize">{{ $statResult->name }}:</span> {{ $statResult->value }}
-                    </div>
-                @endforeach
-            </div>
+    </div>
+    <div class="w-full {{ $headerStyle }} pb-1 px-2 max-w-100">
+        @if (count($statResults))
+            @foreach ($statResults as $statResult)
+                <div>
+                    <span class="font-bold text-gray capitalize">{{ $statResult->name }}:</span> {{ $statResult->value }}
+                </div>
+            @endforeach
         @endif
     </div>
 
