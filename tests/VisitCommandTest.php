@@ -25,7 +25,7 @@ beforeEach(function () {
     Route::get('logged-in-user', function () {
         $userEmail = auth()->user()?->email;
 
-        if (!$userEmail) {
+        if (! $userEmail) {
             $userEmail = 'nobody';
         }
 
