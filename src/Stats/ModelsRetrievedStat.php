@@ -13,11 +13,10 @@ class ModelsRetrievedStat extends Stat
         /** @var \Illuminate\Events\Dispatcher $dispatcher */
         $dispatcher = $app['events'];
 
-        $dispatcher->listen('eloquent.retrieved:*', function() {
+        $dispatcher->listen('eloquent.retrieved:*', function () {
             $this->modelsRetrievedCount++;
         });
     }
-
 
     public function getStatResult(): StatResult
     {
