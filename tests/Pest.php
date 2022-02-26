@@ -1,14 +1,22 @@
 <?php
 
+use Spatie\Visit\Tests\ArtisanOutput;
 use Spatie\Visit\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 
 function expectOutputContains(string ...$substrings)
 {
-    $output = Artisan::output();
+    $output = ArtisanOutput::get();
 
     collect($substrings)->each(fn (string $substring) => expect($output)->toContain($substring));
+}
+
+function expectOutputDoesNotContain(string ...$substrings)
+{
+    $output = ArtisanOutput::get();
+
+    collect($substrings)->each(fn (string $substring) => expect($output)->not()->toContain($substring));
 }
 
 function runningOnWindows(): bool

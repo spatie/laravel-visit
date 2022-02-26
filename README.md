@@ -168,6 +168,62 @@ This is how the default Laravel homepage will look like.
 
 ![screenshot](TODO: insert screenshot)
 
+### Filtering HTML output
+
+If you only want to see a part of an HTML response you can use the `--filter` option. For HTML output, you can pass [a css selector](https://www.w3schools.com/cssref/css_selectors.asp).
+
+Imagine that your app's full response is this HTML:
+
+```html
+<html>
+    <body>
+        <div>First div</div>
+        <p>First paragraph</p>
+        <p>Second paragraph</p>
+    </body>
+</html>
+```
+
+This command ...
+
+```bash
+php artisan visit / --filter="p"
+```
+
+... will display:
+
+```html
+<p>First paragraph</p>
+<p>Second paragraph</p>
+```
+
+### Filtering JSON output
+
+If you only want to see a part of an JSON response you can use the `--filter` option. You may use dot-notation to reach nested parts.
+
+Imagine that your app's full response is this JSON:
+
+```json
+{
+    "firstName": "firstValue",
+    "nested": {
+        "secondName": "secondValue"
+    }
+}
+```
+
+This command ...
+
+```bash
+php artisan visit / --filter="nested.secondName"
+```
+
+... will display:
+
+```html
+secondValue
+```
+
 ### Adding stats
 
 In the results block underneath the response, you'll see a few interesting stats by default, such as the response time and queries executed.
@@ -195,7 +251,7 @@ abstract class Stat
 }
 ```
 
-As an example implentation, take a look at the `RunTimeStat` that ships with the package.
+As an example implementation, take a look at the `RunTimeStat` that ships with the package.
 
 ```php
 namespace Spatie\Visit\Stats;

@@ -11,6 +11,13 @@ use Termwind\Laravel\TermwindServiceProvider;
 
 class TestCase extends Orchestra
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        ArtisanOutput::clear();
+    }
+
     protected function getPackageProviders($app)
     {
         return [

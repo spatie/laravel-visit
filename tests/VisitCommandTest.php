@@ -25,7 +25,7 @@ beforeEach(function () {
     Route::get('logged-in-user', function () {
         $userEmail = auth()->user()?->email;
 
-        if (! $userEmail) {
+        if (!$userEmail) {
             $userEmail = 'nobody';
         }
 
@@ -163,7 +163,28 @@ it('can display custom stats', function () {
 });
 
 it('can filter json content', function () {
+    Route::get('/big-json', function () {
+        return response()->json([
+            'firstName' => 'firstValue',
+            'nested' => [
+                'secondName' => 'secondValue',
+            ],
+        ]);
+    });
+
+    Artisan::call("visit /big-json --filter=nested.secondName");
+
+    expectOutputContains('GET /big-json', 'secondValue');
+    expectOutputDoesNotContain('firstValue');
 });
 
 it('can filter html content', function () {
+    Route::get('big-html', function() {
+       return '<html><body><div>First div</div><p>First paragraph</p><p>Second paragraph</p></body></html>';
+    });
+
+    Artisan::call('visit /big-html --filter="p"');
+
+    expectOutputContains('GET /big-html', '<p>First paragraph</p><p>Second paragraph</p>');
+    expectOutputDoesNotContain('First div');
 });
