@@ -25,7 +25,7 @@ beforeEach(function () {
     Route::get('logged-in-user', function () {
         $userEmail = auth()->user()?->email;
 
-        if (!$userEmail) {
+        if (! $userEmail) {
             $userEmail = 'nobody';
         }
 
@@ -179,8 +179,8 @@ it('can filter json content', function () {
 });
 
 it('can filter html content', function () {
-    Route::get('big-html', function() {
-       return '<html><body><div>First div</div><p>First paragraph</p><p>Second paragraph</p></body></html>';
+    Route::get('big-html', function () {
+        return '<html><body><div>First div</div><p>First paragraph</p><p>Second paragraph</p></body></html>';
     });
 
     Artisan::call('visit /big-html --filter="p"');
