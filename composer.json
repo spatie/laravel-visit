@@ -21,6 +21,7 @@
         "nunomaduro/termwind": "^1.5",
         "soundasleep/html2text": "^2.0",
         "spatie/laravel-package-tools": "^1.11.1",
+        "symfony/dom-crawler": "^6.0",
         "symfony/stopwatch": "^6.0"
     },
     "require-dev": {
