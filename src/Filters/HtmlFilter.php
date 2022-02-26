@@ -3,7 +3,6 @@
 namespace Spatie\Visit\Filters;
 
 use Illuminate\Testing\TestResponse;
-use Symfony\Component\CssSelector\CssSelectorConverter;
 use Symfony\Component\DomCrawler\Crawler;
 
 class HtmlFilter extends Filter
