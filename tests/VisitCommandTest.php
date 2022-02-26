@@ -179,8 +179,8 @@ it('can filter json content', function () {
 });
 
 it('can filter html content', function () {
-    Route::get('filter-html', function() {
-       return '<html><body><div>First div</div><p>First paragraph</p><p>Second paragraph</p></body></html>';
+    Route::get('filter-html', function () {
+        return '<html><body><div>First div</div><p>First paragraph</p><p>Second paragraph</p></body></html>';
     });
 
     Artisan::call('visit /filter-html --filter="p"');
