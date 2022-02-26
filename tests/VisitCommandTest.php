@@ -163,7 +163,7 @@ it('can display custom stats', function () {
 });
 
 it('can filter json content', function () {
-    Route::get('/big-json', function () {
+    Route::get('/filter-json', function () {
         return response()->json([
             'firstName' => 'firstValue',
             'nested' => [
@@ -172,19 +172,19 @@ it('can filter json content', function () {
         ]);
     });
 
-    Artisan::call("visit /big-json --filter=nested.secondName");
+    Artisan::call("visit /filter-json --filter=nested.secondName");
 
-    expectOutputContains('GET /big-json', 'secondValue');
+    expectOutputContains('GET /filter-json', 'secondValue');
     expectOutputDoesNotContain('firstValue');
 });
 
 it('can filter html content', function () {
-    Route::get('big-html', function() {
+    Route::get('filter-html', function() {
        return '<html><body><div>First div</div><p>First paragraph</p><p>Second paragraph</p></body></html>';
     });
 
-    Artisan::call('visit /big-html --filter="p"');
+    Artisan::call('visit /filter-html --filter="p"');
 
-    expectOutputContains('GET /big-html', '<p>First paragraph</p><p>Second paragraph</p>');
+    expectOutputContains('GET /filter-html', '<p>First paragraph</p><p>Second paragraph</p>');
     expectOutputDoesNotContain('First div');
 });
