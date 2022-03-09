@@ -30,15 +30,11 @@ class VisitCommand extends Command
             {--show-exception}
             {--headers}
             {--no-color}
-            {--as-text}
+            {--text}
             {--only-response}
             {--only-stats}
             {--filter=}
         ';
-
-    // filter: json, xpath
-    // payload as file
-    // display request as curl
 
     public $description = 'Visit a route';
 
@@ -176,7 +172,7 @@ class VisitCommand extends Command
             $content = $filterClass->filter($response, $content, $filter);
         }
 
-        if ($this->option('as-text')) {
+        if ($this->option('text')) {
             $content = Html2Text::convert($content, ['ignore_errors' => true]);
 
             $this->output->writeln($content);

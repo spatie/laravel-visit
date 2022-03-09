@@ -158,10 +158,10 @@ php artisan visit / --no-color
 
 ### Displaying the result HTML as text
 
-Usually an HTML response is quite lengthy. This can make it hard to quickly see what text will be displayed in the browser. To convert an HTML to a text variant, you can pass the `--as-text` option.
+Usually an HTML response is quite lengthy. This can make it hard to quickly see what text will be displayed in the browser. To convert an HTML to a text variant, you can pass the `--text` option.
 
 ```bash
-php artisan visit / --as-text
+php artisan visit / --text
 ```
 
 This is how the default Laravel homepage will look like.

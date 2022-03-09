@@ -149,7 +149,7 @@ it('can output html as text', function () {
         return '<html><a href="https://spatie.be">Homepage</a></html>';
     });
 
-    Artisan::call("visit /html --as-text");
+    Artisan::call("visit /html --text");
 
     expectOutputContains('GET /html', '[Homepage](https://spatie.be)');
 });
