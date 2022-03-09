@@ -114,10 +114,10 @@ php artisan visit /api/user/me --user=john@example.com
 
 ### Showing the headers of the response
 
-By default, the `visit` command will not show any headers. To display them, add the `--show-headers` option
+By default, the `visit` command will not show any headers. To display them, add the `--headers` option
 
 ```bash
-php artisan visit /my-page --show-headers
+php artisan visit /my-page --headers
 ```
 
 ![screenshot](https://spatie.github.io/laravel-visit/images/headers.png)

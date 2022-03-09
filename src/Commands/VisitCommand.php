@@ -28,7 +28,7 @@ class VisitCommand extends Command
             {--payload=}
             {--user=}
             {--show-exception}
-            {--show-headers}
+            {--headers}
             {--no-color}
             {--as-text}
             {--only-response}
@@ -210,7 +210,7 @@ class VisitCommand extends Command
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
             'headers' => $response->headers->all(),
-            'showHeaders' => $this->option('show-headers'),
+            'showHeaders' => $this->option('headers'),
             'headerStyle' => $this->getHeaderStyle($response),
             'statResults' => $statResults,
         ]);
