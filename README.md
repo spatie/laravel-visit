@@ -166,7 +166,7 @@ php artisan visit / --as-text
 
 This is how the default Laravel homepage will look like.
 
-![screenshot](TODO: insert screenshot)
+![screenshot](https://spatie.github.io/laravel-visit/images/text.png)
 
 ### Filtering HTML output
 
