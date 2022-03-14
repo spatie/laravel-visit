@@ -12,7 +12,7 @@ class Redirects
 
     public static function forUrl(string $startUrl): self
     {
-        return new static($startUrl);
+        return new self($startUrl);
     }
 
     protected function __construct(string $startUrl)

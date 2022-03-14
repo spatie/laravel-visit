@@ -116,7 +116,7 @@ class VisitCommand extends Command
         return $payload;
     }
 
-    /** @return array{response: TestResponse, statResults:array<int, \Spatie\Visit\Stats\StatResult>} */
+    /** @return array{response: TestResponse, statResults:array<int, StatResult>, redirects: Redirects} */
     protected function makeRequest(): array
     {
         $method = $this->getMethod();
@@ -154,7 +154,8 @@ class VisitCommand extends Command
 
     /**
      * @param \Illuminate\Testing\TestResponse $response
-     * @param array<int, StatResult $statResults
+     * @param array<int, StatResult> $statResults
+     * @param Redirects $redirects
      *
      * @return $this
      */
@@ -265,6 +266,7 @@ class VisitCommand extends Command
             ->map(fn (string $filterClassName) => app($filterClassName))
             ->first(fn (Filter $filter) => $filter->canFilter($response, $content));
 
+        /** @phpstan-ignore-next-line  */
         return $filter ?? new DummyFilter();
     }
 }

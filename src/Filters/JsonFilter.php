@@ -11,7 +11,7 @@ class JsonFilter extends Filter
     {
         $contentType = $response->headers->get('content-type', '');
 
-        if (! $contentType === 'application/json') {
+        if ($contentType !== 'application/json') {
             return false;
         }
 
