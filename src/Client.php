@@ -17,8 +17,7 @@ class Client
     public function __construct(
         protected Application $app,
         protected Redirects $followedRedirects
-    )
-    {
+    ) {
     }
 
     public function getFollowedRedirects(): Redirects

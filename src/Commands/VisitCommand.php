@@ -162,8 +162,7 @@ class VisitCommand extends Command
         TestResponse $response,
         array $statResults,
         Redirects $redirects,
-    ): self
-    {
+    ): self {
         if (! $this->option('only-stats')) {
             $this->renderContent($response);
         }
@@ -215,9 +214,7 @@ class VisitCommand extends Command
         TestResponse $response,
         array $statResults,
         Redirects $redirects,
-
-    ): self
-    {
+    ): self {
         $redirectingTo = '';
 
         if ($response->isRedirect() && $response->headers->get('location')) {
