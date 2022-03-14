@@ -190,7 +190,7 @@ it('can filter html content', function () {
 });
 
 it('will not show redirect if there are none', function() {
-    Artisan::call('visit /');
+    Artisan::call('visit / --follow-redirects');
 
     expectOutputDoesNotContain('Redirects');
 });
@@ -204,7 +204,7 @@ it('will show all redirects', function () {
         return 'You have arrived';
     });
 
-    Artisan::call('visit /redirect-from');
+    Artisan::call('visit /redirect-from --follow-redirects');
 
     expectOutputContains('GET /redirect-to', 'Redirects', '302 /redirect-from');
 });

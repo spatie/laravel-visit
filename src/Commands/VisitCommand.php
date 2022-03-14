@@ -29,6 +29,7 @@ class VisitCommand extends Command
             {--payload=}
             {--user=}
             {--show-exception}
+            {--follow-redirects}
             {--headers}
             {--no-color}
             {--text}
@@ -125,7 +126,9 @@ class VisitCommand extends Command
 
         $client = new Client($application, Redirects::forUrl($url));
 
-        $client->followingRedirects();
+        if ($this->option('follow-redirects')) {
+            $client->followingRedirects();
+        }
 
         if ($this->option('show-exception')) {
             $client->withoutExceptionHandling();
