@@ -25,7 +25,7 @@ beforeEach(function () {
     Route::get('logged-in-user', function () {
         $userEmail = auth()->user()?->email;
 
-        if (!$userEmail) {
+        if (! $userEmail) {
             $userEmail = 'nobody';
         }
 
@@ -189,7 +189,7 @@ it('can filter html content', function () {
     expectOutputDoesNotContain('First div');
 });
 
-it('will not show redirect if there are none', function() {
+it('will not show redirect if there are none', function () {
     Artisan::call('visit / --follow-redirects');
 
     expectOutputDoesNotContain('Redirects');
