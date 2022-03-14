@@ -3,7 +3,6 @@
 namespace Spatie\Visit\Support;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 
@@ -14,7 +13,6 @@ class Redirects
     public static function forUrl(string $startUrl): self
     {
         return new static($startUrl);
-
     }
 
     protected function __construct(string $startUrl)
@@ -27,8 +25,8 @@ class Redirects
         $redirectLocation = Str::after($response->headers->get('Location'), config('app.url'));
 
         $this
-            ->addToLastItem('to',$redirectLocation)
-            ->addToLastItem('status',$response->getStatusCode());
+            ->addToLastItem('to', $redirectLocation)
+            ->addToLastItem('status', $response->getStatusCode());
 
         $this->redirects[] = ['from' => $redirectLocation];
     }
@@ -56,6 +54,5 @@ class Redirects
         $lastKey = array_key_last($this->redirects);
 
         return $this->redirects[$lastKey]['from'];
-
     }
 }

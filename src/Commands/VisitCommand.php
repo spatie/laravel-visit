@@ -161,8 +161,7 @@ class VisitCommand extends Command
         TestResponse $response,
         array $statResults,
         Redirects $redirects,
-    ): self
-    {
+    ): self {
         if (! $this->option('only-stats')) {
             $this->renderContent($response);
         }
@@ -214,9 +213,7 @@ class VisitCommand extends Command
         TestResponse $response,
         array $statResults,
         Redirects $redirects,
-
-    ): self
-    {
+    ): self {
         $requestPropertiesView = view('visit::stats', [
             'method' => $this->option('method'),
             'url' => $redirects->lastTo(),

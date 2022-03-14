@@ -5,7 +5,6 @@ namespace Spatie\Visit;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
-use Illuminate\Support\Str;
 use Spatie\Visit\Support\Redirects;
 
 class Client
@@ -17,9 +16,9 @@ class Client
 
     public function __construct(
         protected Application $app,
-        protected Redirects $followedRedirects)
+        protected Redirects $followedRedirects
+    )
     {
-
     }
 
     public function getFollowedRedirects(): Redirects
@@ -43,6 +42,4 @@ class Client
 
         return $response;
     }
-
-
 }
