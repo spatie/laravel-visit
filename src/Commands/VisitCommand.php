@@ -4,6 +4,7 @@ namespace Spatie\Visit\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use Soundasleep\Html2Text;
 use Spatie\Visit\Client;
@@ -217,11 +218,18 @@ class VisitCommand extends Command
 
     ): self
     {
+        $redirectingTo = '';
+
+        if ($response->isRedirect() && $response->headers->get('location')) {
+            $redirectingTo = Str::after($response->headers->get('Location'), config('app.url'));
+        }
+
         $requestPropertiesView = view('visit::stats', [
             'method' => $this->option('method'),
             'url' => $redirects->lastTo(),
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
+            'redirectingTo' => $redirectingTo,
             'headers' => $response->headers->all(),
             'showHeaders' => $this->option('headers'),
             'redirects' => $redirects->all(),
