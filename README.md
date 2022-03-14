@@ -125,6 +125,14 @@ php artisan visit /my-page --headers
 
 ![screenshot](https://spatie.github.io/laravel-visit/images/headers.png)
 
+### Following redirects
+
+By default, the `visit` command will not follow redirects. To follow redirects and display the response of the redirection target, add the `--follow-redirects` option.
+
+```bash
+php artisan visit /my-page --follow-redirects
+```
+
 ### Showing exception pages
 
 When your application responds with an exception, the `visit` command will show the html of the error page.
