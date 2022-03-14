@@ -5,6 +5,8 @@ namespace Spatie\Visit;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
+use Illuminate\Support\Str;
+use Spatie\Visit\Support\Redirects;
 
 class Client
 {
@@ -13,17 +15,34 @@ class Client
         withoutExceptionHandling as protected traitWithoutExceptionHandling;
     }
 
-    public static function make(): self
+    public function __construct(
+        protected Application $app,
+        protected Redirects $followedRedirects)
     {
-        return new self(app());
+
     }
 
-    public function __construct(protected Application $app)
+    public function getFollowedRedirects(): Redirects
     {
+        return $this->followedRedirects;
     }
 
     public function withoutExceptionHandling(array $except = [])
     {
         $this->traitWithoutExceptionHandling($except);
     }
+
+    protected function followRedirects($response)
+    {
+        $this->followRedirects = false;
+
+        while ($response->isRedirect()) {
+            $this->followedRedirects->add($response);
+            $response = $this->get($response->headers->get('Location'));
+        }
+
+        return $response;
+    }
+
+
 }

@@ -17,6 +17,7 @@ use Spatie\Visit\Filters\DummyFilter;
 use Spatie\Visit\Filters\Filter;
 use Spatie\Visit\Stats\StatResult;
 use Spatie\Visit\Stats\StatsCollection;
+use Spatie\Visit\Support\Redirects;
 use function Termwind\render;
 
 class VisitCommand extends Command
@@ -42,9 +43,9 @@ class VisitCommand extends Command
     {
         $this->logInUser();
 
-        ['response' => $response, 'statResults' => $statResults] = $this->makeRequest();
+        ['response' => $response, 'statResults' => $statResults, 'redirects' => $redirects] = $this->makeRequest();
 
-        $this->renderResponse($response, $statResults);
+        $this->renderResponse($response, $statResults, $redirects);
 
         return $response->isSuccessful() || $response->isRedirect()
             ? self::SUCCESS
@@ -122,7 +123,9 @@ class VisitCommand extends Command
 
         $application = app();
 
-        $client = new Client($application);
+        $client = new Client($application, Redirects::forUrl($url));
+
+        $client->followingRedirects();
 
         if ($this->option('show-exception')) {
             $client->withoutExceptionHandling();
@@ -140,7 +143,9 @@ class VisitCommand extends Command
 
         $statResults = $stats->getResults();
 
-        return compact('response', 'statResults');
+        $redirects = $client->getFollowedRedirects();
+
+        return compact('response', 'statResults', 'redirects');
     }
 
     /**
@@ -149,14 +154,18 @@ class VisitCommand extends Command
      *
      * @return $this
      */
-    protected function renderResponse(TestResponse $response, array $statResults): self
+    protected function renderResponse(
+        TestResponse $response,
+        array $statResults,
+        Redirects $redirects,
+    ): self
     {
         if (! $this->option('only-stats')) {
             $this->renderContent($response);
         }
 
         if (! $this->option('only-response')) {
-            $this->renderStats($response, $statResults);
+            $this->renderStats($response, $statResults, $redirects);
         }
 
         return $this;
@@ -198,15 +207,21 @@ class VisitCommand extends Command
      * @return $this
      * @throws \Spatie\Visit\Exceptions\NoUrlSpecified
      */
-    protected function renderStats(TestResponse $response, array $statResults): self
+    protected function renderStats(
+        TestResponse $response,
+        array $statResults,
+        Redirects $redirects,
+
+    ): self
     {
         $requestPropertiesView = view('visit::stats', [
             'method' => $this->option('method'),
-            'url' => $this->getUrl(),
+            'url' => $redirects->lastTo(),
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
             'headers' => $response->headers->all(),
             'showHeaders' => $this->option('headers'),
+            'redirects' => $redirects->all(),
             'headerStyle' => $this->getHeaderStyle($response),
             'statResults' => $statResults,
         ]);
