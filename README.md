@@ -24,6 +24,10 @@ The command display the colorized version of the HTML...
 
 The command can also colorize JSON output. It also has support for some Laravel niceties such as logging in users before making a request, using a route name instead of and URL, and much more.
 
+## Want to use `visit` to visit any site
+
+[The `spatie/visit` tool](https://github.com/spatie/visit) can be installed globally to visit any site.
+
 ## Support us
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-visit.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-visit)
@@ -39,6 +43,19 @@ You can install the package via composer:
 ```bash
 composer require spatie/laravel-visit
 ```
+
+To colorize HTML, you should install `bat`.
+
+```bash
+brew install bat
+```
+
+To colorize JSON, you should install `jq`.
+
+```bash
+brew install jq
+```
+
 
 Optionally, you can publish the config file.
 
