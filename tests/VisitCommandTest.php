@@ -133,6 +133,16 @@ it('will accept json as payload', function () {
     expectOutputContains('POST /payload', 'testValue');
 })->skip(runningOnWindows(), 'This feature is not supported on Windows');
 
+it('will use http method post by default when passing a payload', function () {
+    $jsonPayload = json_encode(['testKey' => 'testValue']);
+
+    $jsonPayload = escapeshellarg($jsonPayload);
+
+    Artisan::call("visit /payload --payload={$jsonPayload}");
+
+    expectOutputContains('POST /payload', 'testValue');
+})->skip(runningOnWindows(), 'This feature is not supported on Windows');
+
 it('will not accept invalid json as payload', function () {
     Artisan::call("visit /payload --method=post --payload=blabla");
 })->throws(InvalidPayload::class);

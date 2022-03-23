@@ -26,7 +26,7 @@ class VisitCommand extends Command
     public $signature = '
         visit {url?}
             {--route=}
-            {--method=get}
+            {--method=}
             {--payload=}
             {--user=}
             {--show-exception}
@@ -75,7 +75,11 @@ class VisitCommand extends Command
 
     protected function getMethod(): string
     {
-        $method = strtolower($this->option('method'));
+        $defaultMethodName = $this->option('payload') ? 'post' : 'get';
+
+        $method = $this->option('method') ?? $defaultMethodName;
+
+        $method = strtolower($method);
 
         $validMethodNames = collect(['get', 'post', 'put', 'patch', 'delete']);
 
@@ -223,7 +227,7 @@ class VisitCommand extends Command
         }
 
         $requestPropertiesView = view('visit::stats', [
-            'method' => $this->option('method'),
+            'method' => $this->getMethod(),
             'url' => $redirects->lastTo(),
             'statusCode' => $response->getStatusCode(),
             'content' => $response->content(),
