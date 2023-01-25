@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-visit` will be documented in this file.
 
+## 1.0.2 - 2023-01-25
+
+- support L10
+
 ## 1.0.1 - 2022-04-04
 
 ## What's Changed
