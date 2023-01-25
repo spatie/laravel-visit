@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/contracts": "^9.0",
+        "illuminate/contracts": "^9.0|^10.0",
         "nunomaduro/termwind": "^1.7",
         "soundasleep/html2text": "^2.0",
         "spatie/laravel-package-tools": "^1.11.1",
@@ -28,7 +28,7 @@
     "require-dev": {
         "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^7.0|^8.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-laravel": "^1.2",
         "phpstan/extension-installer": "^1.1",
