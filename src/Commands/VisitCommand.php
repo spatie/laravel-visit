@@ -19,6 +19,7 @@ use Spatie\Visit\Filters\Filter;
 use Spatie\Visit\Stats\StatResult;
 use Spatie\Visit\Stats\StatsCollection;
 use Spatie\Visit\Support\Redirects;
+
 use function Termwind\render;
 
 class VisitCommand extends Command
