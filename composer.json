@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.0",
         "illuminate/contracts": "^9.0|^10.0|^11.0",
-        "nunomaduro/termwind": "^1.7",
+        "nunomaduro/termwind": "^2.0",
         "soundasleep/html2text": "^2.0",
         "spatie/laravel-package-tools": "^1.11.1",
         "symfony/css-selector": "^6.0",
@@ -26,15 +26,15 @@
         "symfony/stopwatch": "^6.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^6.1",
+        "nunomaduro/collision": "^v8.1.1",
         "nunomaduro/larastan": "^2.0.1",
-        "orchestra/testbench": "^7.0|^8.0",
-        "pestphp/pest": "^1.21",
-        "pestphp/pest-plugin-laravel": "^1.2",
+        "orchestra/testbench": "^8.0|^9.0",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-laravel": "^2.3",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5.13",
+        "phpunit/phpunit": "^10.5.16",
         "spatie/laravel-ray": "^1.29"
     },
     "autoload": {
