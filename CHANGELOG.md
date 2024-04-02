@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-visit` will be documented in this file.
 
+## 1.1.1 - 2024-04-02
+
+Bump dependencies.
+
 ## Support Laravel 11 - 2024-04-02
 
 ### What's Changed
