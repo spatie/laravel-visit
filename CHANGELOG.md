@@ -2,6 +2,24 @@
 
 All notable changes to `laravel-visit` will be documented in this file.
 
+## 1.1.2 - 2025-02-17
+
+### What's Changed
+
+* Bump actions/checkout from 3.6.0 to 4.1.7 by @dependabot in https://github.com/spatie/laravel-visit/pull/37
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.2.0 by @dependabot in https://github.com/spatie/laravel-visit/pull/38
+* Bump actions/checkout from 4.1.7 to 4.2.0 by @dependabot in https://github.com/spatie/laravel-visit/pull/39
+* Bump actions/checkout from 4.2.0 to 4.2.1 by @dependabot in https://github.com/spatie/laravel-visit/pull/40
+* Bump actions/checkout from 4.2.1 to 4.2.2 by @dependabot in https://github.com/spatie/laravel-visit/pull/41
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/laravel-visit/pull/42
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-visit/pull/43
+
+### New Contributors
+
+* @laravel-shift made their first contribution in https://github.com/spatie/laravel-visit/pull/43
+
+**Full Changelog**: https://github.com/spatie/laravel-visit/compare/1.1.1...1.1.2
+
 ## 1.1.1 - 2024-04-02
 
 Bump dependencies.
