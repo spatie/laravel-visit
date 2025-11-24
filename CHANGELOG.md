@@ -2,6 +2,23 @@
 
 All notable changes to `laravel-visit` will be documented in this file.
 
+## 1.1.3 - 2025-11-24
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/spatie/laravel-visit/pull/44
+* Update issue template by @AlexVanderbist in https://github.com/spatie/laravel-visit/pull/47
+* Added Symfony 8 support to all symfony/* packages. by @thecaliskan in https://github.com/spatie/laravel-visit/pull/50
+* Bump actions/checkout from 4.2.2 to 6.0.0 by @dependabot[bot] in https://github.com/spatie/laravel-visit/pull/51
+* Bump stefanzweifel/git-auto-commit-action from 4 to 7 by @dependabot[bot] in https://github.com/spatie/laravel-visit/pull/48
+
+### New Contributors
+
+* @AlexVanderbist made their first contribution in https://github.com/spatie/laravel-visit/pull/47
+* @thecaliskan made their first contribution in https://github.com/spatie/laravel-visit/pull/50
+
+**Full Changelog**: https://github.com/spatie/laravel-visit/compare/1.1.2...1.1.3
+
 ## 1.1.2 - 2025-02-17
 
 ### What's Changed
