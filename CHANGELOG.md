@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-visit` will be documented in this file.
 
+## 1.2.0 - 2026-03-02
+
+**Full Changelog**: https://github.com/spatie/laravel-visit/compare/2.0.0...1.2.0
+
 ## 2.0.0 - 2026-03-02
 
 ### What's changed
