@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-visit` will be documented in this file.
 
+## 2.0.0 - 2026-03-02
+
+### What's changed
+
+- Add support for Laravel 13.x
+- Drop Laravel 11.x support
+- Bump minimum PHP to 8.3
+- Upgrade to Pest 4 and PHPUnit 12
+- Add PHP 8.5 to the CI matrix
+- Update phpunit.xml.dist for PHPUnit 12
+
 ## 1.1.3 - 2025-11-24
 
 ### What's Changed
