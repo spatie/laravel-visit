@@ -13,12 +13,17 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: [8.5, 8.4, 8.3]
+        php: [8.6, 8.5, 8.4, 8.3]
         laravel: ['12.*', '13.*']
         stability: [prefer-stable]
+        exclude:
+          # PHP 8.6 needs Pest 5/ParaTest with PHPUnit 13 and Symfony Process 8;
+          # Laravel 12/Testbench 10 require the older testing stack.
+          - php: 8.6
+            laravel: 12.*
         include:
           - laravel: 12.*
             testbench: 10.*
@@ -43,10 +48,16 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
+      - name: Verify PHP runtime
+        shell: bash
+        run: |
+          php -v
+          php -r 'exit(PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION === "${{ matrix.php }}" ? 0 : 1);'
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/pest
+        run: vendor/bin/pest --display-deprecations --display-phpunit-deprecations
